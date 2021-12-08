@@ -49,7 +49,7 @@ let modiferTache = async function (req, res) {
 
 // Méthode de suppression d'une tâche
 let supprimerTache = async function (req, res) {
-  var id = req.params.id;
+  var id = req.params.id; //prend id à partir d'URL
   console.log(id);
   try {
     var taches = TacheService.supprimerTache(id);
@@ -63,5 +63,5 @@ let supprimerTache = async function (req, res) {
   }
 };
 
-// exports les méthodes
+// exportation des fonctions
 module.exports = { getTaches, ajoutTache, modiferTache, supprimerTache };

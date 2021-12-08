@@ -28,24 +28,11 @@ let modifierTache = async function (tache, id) {
         deadline: tache.deadline,
       },
     },
-    { new: true },
-    function (err, updatedTache) {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(updatedTache);
-      }
-    }
-  );
+    { new: true }
+  ).exec();
 };
 
 let supprimerTache = async function (id) {
-  Tache.findByIdAndDelete(id, function (err, deletetache) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(deletetache);
-    }
-  });
+  Tache.findByIdAndDelete(id).exec();
 };
 module.exports = { getTaches, ajoutTache, modifierTache, supprimerTache };

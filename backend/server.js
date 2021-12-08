@@ -1,10 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 var cookies = require("cookie-parser");
+require("dotenv").config();
+const { PORT } = process.env;
 
 const database = require("./config/db");
 const cors = require("cors");
-const PORT = 5000;
 const app = express();
 const userApi = require("./routes/userApi");
 const tacheApi = require("./routes/tacheApi");

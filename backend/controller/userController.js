@@ -31,7 +31,11 @@ let inscription = async function (req, res) {
     );
     // Enregistrer token
     user.token = token;
-
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
     res.status(201).json(user);
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
@@ -62,7 +66,11 @@ let login = async function (req, res) {
 
       // enregister token d'utilisateur
       user.token = token;
-
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+        })
+        .send();
       res.status(200).json(user);
     }
     res.status(400).send("Invalid Credentials");

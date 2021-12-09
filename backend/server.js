@@ -10,9 +10,10 @@ const app = express();
 const userApi = require("./routes/userApi");
 const tacheApi = require("./routes/tacheApi");
 
-app.use(cookies());
-
 app.use(express.json());
+app.use(cookies());
+app.use(bodyParser.json());
+
 app.use(
   cors({
     origin: ["http://localhost:3000"],
@@ -22,7 +23,6 @@ app.use(
 
 app.use("/auth", userApi);
 app.use("/tache", tacheApi);
-app.use(bodyParser.json());
 
 app.get("/", function (req, res) {
   res.send("Hello from server");

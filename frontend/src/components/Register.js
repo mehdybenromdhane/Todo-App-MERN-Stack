@@ -54,7 +54,7 @@ export default function Inscription() {
 
       await SignUp(registerData);
       await getLoggedIn();
-      history.push("/");
+      history.push("/welcome");
     } catch (err) {
       console.error(err);
     }

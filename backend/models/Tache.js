@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const tacheSchema = new Schema({
   titre: String,
   description: String,
-  deadline: String,
+  deadline: Date,
 
   date: {
     type: Date,

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 var UserController = require("../controller/userController");
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 //routes CRUD users
 router.post("/inscription", UserController.inscription);
@@ -28,5 +29,16 @@ router.get("/loggedIn", (req, res) => {
   } catch (err) {
     res.json(false);
   }
+});
+
+router.get("/user/:id", (req, res) => {
+  let idUser = req.params.id;
+  User.findById(idUser).exec(function (err, taches) {
+    if (err) {
+      console.log("error taches");
+    } else {
+      res.json(taches);
+    }
+  });
 });
 module.exports = router;

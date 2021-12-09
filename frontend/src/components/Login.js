@@ -54,7 +54,7 @@ export default function Login() {
       };
       await Connexion(loginData);
       await getLoggedIn();
-      history.push("/");
+      history.push("/welcome");
     } catch (err) {
       console.error(err);
     }

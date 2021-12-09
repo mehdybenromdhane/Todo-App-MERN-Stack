@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Paper, TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export default function EditTodo(props) {
   const [titre, setTitre] = useState("");
@@ -12,11 +12,8 @@ export default function EditTodo(props) {
 
   let id = str.slice(6);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:5000/tache/" + id)
-  //     .then((response) => setDatas(response.data.data.taches));
-  // }, []);
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     console.log("id", id);
     e.preventDefault();
@@ -35,6 +32,7 @@ export default function EditTodo(props) {
     setTitre("");
     setDescription("");
     setDeadline("");
+    history.push("/todo");
   };
 
   const useStyles = makeStyles({

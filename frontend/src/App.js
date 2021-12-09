@@ -8,6 +8,7 @@ import axios from "axios";
 import AuthContext, { AuthContextProvider } from "./context/authContext";
 import TodoApp from "./components/TodoApp";
 import EditTodo from "./components/EditTodo";
+import Welcome from "./components/Welcome";
 
 axios.defaults.withCredentials = true;
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Navbar />
             <Route path="/todo" component={TodoApp} />
             <Route path="/edit" component={EditTodo} />
+            <Route path="/welcome" component={Welcome} />
 
             <Switch>
               {!loggedIn && (

@@ -1,13 +1,31 @@
 var express = require("express");
 var router = express.Router();
+var Tache = require("../models/Tache");
+var User = require("../models/User");
 
 var TacheController = require("../controller/tacheController");
 const auth = require("../middleware/auth");
 
 //routes CRUD taches
-router.get("/", auth, TacheController.getTaches);
-router.post("/ajout", TacheController.ajoutTache);
+router.get("/:id", TacheController.getTaches);
+router.post("/ajout/:id", TacheController.ajoutTache);
 router.put("/modifier/:id", TacheController.modiferTache);
-router.delete("/supprimer/:id", TacheController.supprimerTache);
 
+router.post("/remove/:idu/:id", function (req, res) {
+  User.findByIdAndUpdate(
+    { _id: req.params.idu },
+    { $pull: { taches: req.params.id } }
+  ).then((err) => {
+    res.send(err);
+  });
+});
+
+router.post("/update/:idu/:id", function (req, res) {
+  User.findByIdAndUpdate(
+    { _id: req.params.idu },
+    { $set: { taches: req.params.id } }
+  ).then((err) => {
+    res.send(err);
+  });
+});
 module.exports = router;

@@ -11,6 +11,13 @@ const userSchema = new Schema({
     default: Date.now,
   },
   token: String,
+
+  taches: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "tache",
+    },
+  ],
 });
 
 module.exports = mongoose.model("user", userSchema, "user");

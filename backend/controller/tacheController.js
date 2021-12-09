@@ -2,8 +2,9 @@ var TacheService = require("../services/tacheService");
 
 // Méthode d'avoir les tâches
 let getTaches = async function (req, res) {
+  userId = req.params.id;
   try {
-    var taches = await TacheService.getTaches({});
+    var taches = await TacheService.getTaches({}, userId);
     return res.status(200).json({
       status: 200,
       data: taches,
@@ -17,13 +18,14 @@ let getTaches = async function (req, res) {
 // Méthode d'ajout d'une tâche
 let ajoutTache = async function (req, res) {
   console.log("ajout d'un nouveau tache");
-  var tache = req.body;
+  var data = req.body;
+  var id = req.params.id;
   try {
-    var taches = await TacheService.ajoutTache(tache);
+    var taches = await TacheService.ajoutTache(data, id);
     return res.status(200).json({
       status: 200,
       data: taches,
-      message: "Succesfully Taches added",
+      message: "Succesfully Taches added ",
     });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });

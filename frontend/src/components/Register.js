@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../context/authContext";
-import SignUp from "../services/AuthService";
+import { SignUp } from "../services/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

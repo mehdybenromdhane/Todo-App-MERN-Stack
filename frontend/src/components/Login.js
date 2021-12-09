@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../context/authContext";
-import Connexion from "../services/AuthService";
+import Connexion, { AuthProvider } from "../services/AuthService";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   const classes = useStyles();
   const { getLoggedIn } = useContext(AuthContext);
+
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

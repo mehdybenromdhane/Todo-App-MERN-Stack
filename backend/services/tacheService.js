@@ -1,8 +1,15 @@
 var Tache = require("../models/Tache");
+var User = require("../models/User");
 
-let getTaches = async function (taches) {
+let getTaches = async function (taches, id) {
   try {
-    var taches = await Tache.find(taches);
+    var taches = User.findById(id)
+      .populate({
+        path: "taches",
+      })
+      .select("taches")
+
+      .exec();
     return taches;
   } catch (e) {
     // Log Errors
@@ -10,12 +17,21 @@ let getTaches = async function (taches) {
   }
 };
 
-let ajoutTache = async function (tache) {
-  var newTache = new Tache();
-  newTache.titre = tache.titre;
-  newTache.description = tache.description;
-  newTache.deadline = tache.deadline;
-  newTache.save();
+let ajoutTache = async function (data, idUser) {
+  const { titre, description, deadline } = data;
+  const tache = await Tache.create({
+    titre,
+    description,
+    deadline,
+  });
+  await tache.save();
+
+  const userById = await User.findById(idUser);
+
+  userById.taches.push(tache);
+
+  await userById.save();
+  console.log("tache add");
 };
 
 let modifierTache = async function (tache, id) {

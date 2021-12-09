@@ -34,6 +34,7 @@ export default function Navbar() {
   async function logOut() {
     await axios.get("http://localhost:5000/auth/logout");
     await getLoggedIn();
+    localStorage.removeItem("id");
     history.push("/");
   }
   return (
@@ -85,6 +86,15 @@ export default function Navbar() {
               <Button color="inherit" onClick={logOut}>
                 Déconnexion
               </Button>
+              <Button color="inherit">
+                <Link
+                  to="/todo"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  {" "}
+                  Todo{" "}
+                </Link>
+              </Button>{" "}
             </>
           )}
         </Toolbar>

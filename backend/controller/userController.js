@@ -70,8 +70,9 @@ let login = async function (req, res) {
         .cookie("token", token, {
           httpOnly: true,
         })
-        .send();
-      res.status(200).json(user);
+
+        .json(user);
+      // res.status(200).json(user);
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {

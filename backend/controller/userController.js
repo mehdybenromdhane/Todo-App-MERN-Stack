@@ -1,4 +1,6 @@
 var UserService = require("../services/userService");
+var MailService = require("../services/mailService");
+
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -21,7 +23,8 @@ let inscription = async function (req, res) {
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
     }
-    await UserService.ajoutUser(user);
+    await UserService.ajoutUser(user); //Ajout d'un utilisateur
+    await MailService.sendMail(user.email); //Envoi mail à un utilisateur
     const token = jwt.sign(
       { user_id: user._id, email },
       process.env.TOKEN_KEY,
@@ -47,7 +50,7 @@ let inscription = async function (req, res) {
 let login = async function (req, res) {
   //charger les informations de requête
   var user = req.body;
-  var { email, password } = user; //destruction
+  var { email, password } = user; //destruction (email et mod de passe)
 
   try {
     if (!(email && password)) {
@@ -72,7 +75,6 @@ let login = async function (req, res) {
         })
 
         .json(user);
-      // res.status(200).json(user);
     }
     res.status(400).send("Invalid Credentials");
   } catch (err) {
@@ -80,4 +82,30 @@ let login = async function (req, res) {
   }
 };
 
-module.exports = { inscription, login };
+//Méthode de déconnexion
+let logOut = async function (req, res) {
+  res
+    .cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    })
+    .send();
+};
+
+//Vérification la connexion d'un utilisateur
+let loggedIn = async function (req, res) {
+  try {
+    const token = req.cookies.token;
+    if (!token) return res.json(false);
+
+    jwt.verify(token, process.env.TOKEN_KEY);
+
+    res.send(true);
+  } catch (err) {
+    res.json(false);
+  }
+};
+
+module.exports = { inscription, login, logOut, loggedIn };

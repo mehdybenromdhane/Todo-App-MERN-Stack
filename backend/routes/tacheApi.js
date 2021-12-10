@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-var Tache = require("../models/Tache");
 var User = require("../models/User");
 
 var TacheController = require("../controller/tacheController");
@@ -20,12 +19,4 @@ router.post("/remove/:idu/:id", function (req, res) {
   });
 });
 
-router.post("/update/:idu/:id", function (req, res) {
-  User.findByIdAndUpdate(
-    { _id: req.params.idu },
-    { $set: { taches: req.params.id } }
-  ).then((err) => {
-    res.send(err);
-  });
-});
 module.exports = router;

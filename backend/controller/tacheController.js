@@ -17,7 +17,6 @@ let getTaches = async function (req, res) {
 
 // Méthode d'ajout d'une tâche
 let ajoutTache = async function (req, res) {
-  console.log("ajout d'un nouveau tache");
   var data = req.body;
   var id = req.params.id;
   try {

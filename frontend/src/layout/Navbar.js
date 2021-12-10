@@ -35,7 +35,7 @@ export default function Navbar() {
     await axios.get("http://localhost:5000/auth/logout");
     await getLoggedIn();
     localStorage.removeItem("id");
-    history.push("/welcome");
+    history.push("/");
   }
   return (
     <div className={classes.root}>

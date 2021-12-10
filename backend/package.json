@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "server": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch "
   },
   "author": "Mehdy",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "chai": "^4.3.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
@@ -20,5 +21,16 @@
     "mongoose": "^6.1.0",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "jest": "^27.4.4",
+    "supertest": "^6.1.6"
   }
 }

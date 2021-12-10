@@ -10,6 +10,7 @@ const app = express();
 const userApi = require("./routes/userApi");
 const tacheApi = require("./routes/tacheApi");
 
+database.connect();
 app.use(express.json());
 app.use(cookies());
 app.use(bodyParser.json());
